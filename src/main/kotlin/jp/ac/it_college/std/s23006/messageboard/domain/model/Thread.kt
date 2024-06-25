@@ -2,11 +2,11 @@ package jp.ac.it_college.std.s23006.messageboard.domain.model
 
 import java.time.LocalDateTime
 
-data class Threads(
+data class Thread(
     val id: Long,
     val title: String,
-    val user_id: String,
-    val created_at: LocalDateTime = LocalDateTime.now(),
-    val updated_at: LocalDateTime = LocalDateTime.now(),
+    val userId: Long,
+    val createdAt: LocalDateTime,
+    var updatedAt: LocalDateTime,
     val deleted: Boolean = false
 )

@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class MessageboardApplication
+class Application
 
 fun main(args: Array<String>) {
-	runApplication<MessageboardApplication>(*args)
+	runApplication<Application>(*args)
 }
