@@ -1,9 +1,11 @@
 package jp.ac.it_college.std.s23006.messageboard.domain.model
 
+import kotlinx.datetime.LocalDateTime
+
 data class ThreadWithUser(
-    val thread: Thread,
-    val user: User?
-) {
-    val isUser: Boolean
-        get() = user != null
-}
+    val id: Long,
+    val title: String,
+    val user: User,
+    val createdAt: LocalDateTime,
+    val updatedAt: LocalDateTime,
+)
