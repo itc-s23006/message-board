@@ -5,6 +5,7 @@ data class User(
     val viewName: String,
     val email: String,
     val password: String
+
 )
 
 

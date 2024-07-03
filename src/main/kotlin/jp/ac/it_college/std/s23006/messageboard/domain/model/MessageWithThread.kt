@@ -9,4 +9,5 @@ data class MessageWithThread(
     val message: String,
     val postedAt: LocalDateTime,
     val updatedAt: LocalDateTime
+
 )

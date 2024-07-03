@@ -6,5 +6,6 @@ data class Message(
     val userId: Thread,
     val message: String,
     val deleted: Boolean = false
+
 )
 

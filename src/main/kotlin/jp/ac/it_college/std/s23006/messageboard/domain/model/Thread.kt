@@ -7,4 +7,5 @@ data class Thread(
     val title: String,
     val createdAt: LocalDateTime,
     val updatedAt: LocalDateTime
+
 )

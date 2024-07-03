@@ -7,5 +7,5 @@ data class ThreadWithUser(
     val title: String,
     val user: User,
     val createdAt: LocalDateTime,
-    val updatedAt: LocalDateTime,
+    val updatedAt: LocalDateTime
 )
