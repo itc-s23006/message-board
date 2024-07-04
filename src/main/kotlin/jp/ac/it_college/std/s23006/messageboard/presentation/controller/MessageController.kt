@@ -1,6 +1,6 @@
 package jp.ac.it_college.std.s23006.messageboard.presentation.controller
 
-import com.sun.nio.sctp.MessageInfo
+import jp.ac.it_college.std.s23006.messageboard.presentation.form.*
 import jp.ac.it_college.std.s23006.messageboard.application.service.MessageService
 import jp.ac.it_college.std.s23006.messageboard.application.service.ThreadService
 import jp.ac.it_college.std.s23006.messageboard.application.service.security.MessageBoardUserDetails

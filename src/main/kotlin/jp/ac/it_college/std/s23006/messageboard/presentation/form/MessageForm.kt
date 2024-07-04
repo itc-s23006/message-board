@@ -5,14 +5,14 @@ import jp.ac.it_college.std.s23006.messageboard.domain.model.MessageWithThread
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable
 
-@Serializable
+@kotlinx.serialization.Serializable
 data class GetMessageListResponse(
     val threadId: Long,
     val title: String,
     val messages: List<MessageInfo>
 )
 
-@Serializable
+@kotlinx.serialization.Serializable
 data class MessageInfo(
     val id: Long,
     val userId: Long?,
@@ -31,12 +31,12 @@ data class MessageInfo(
     )
 }
 
-@Serializable
+@kotlinx.serialization.Serializable
 data class PostMessageRequest(
     val message: String
 )
 
-@Serializable
+@kotlinx.serialization.Serializable
 data class PostedMessageResponse(
     val id: Long,
     val threadId: Long,
@@ -51,12 +51,12 @@ data class PostedMessageResponse(
     )
 }
 
-@Serializable
+@kotlinx.serialization.Serializable
 data class PutMessageUpdateRequest(
     val message: String,
 )
 
-@Serializable
+@kotlinx.serialization.Serializable
 data class MessageUpdateResponse(
     val id: Long,
     val threadId: Long,

@@ -3,20 +3,18 @@ package jp.ac.it_college.std.s23006.messageboard.infrastructure.database.reposit
 import jp.ac.it_college.std.s23006.messageboard.domain.model.Message
 import jp.ac.it_college.std.s23006.messageboard.domain.repository.MessageRepository
 import jp.ac.it_college.std.s23006.messageboard.infrastructure.database.dao.MessagesTable
-import kotlinx.datetime.Clock
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
+import jp.ac.it_college.std.s23006.messageboard.infrastructure.database.dao.UserEntity.Companion.findById
+import kotlinx.datetime.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insertAndGetId
-import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.jetbrains.exposed.sql.update
 import org.springframework.stereotype.Repository
 
 @Repository
-
 class MessageRepositoryImpl : MessageRepository {
     override fun findByThreadId(threadId: Long): List<Message> {
-
         return transaction {
             MessagesTable.select(listOf(MessagesTable.threadId eq threadId))
                 .map { row ->
@@ -43,7 +41,6 @@ class MessageRepositoryImpl : MessageRepository {
                 row[MessagesTable.deleted] = false
             }
         }
-
         return transaction {
             MessagesTable.select { MessagesTable.id eq messageId }
                 .map { row ->
@@ -66,7 +63,6 @@ class MessageRepositoryImpl : MessageRepository {
                 it[MessagesTable.updatedAt] = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
             }
         }
-
         if (updateRows > 0) {
             return transaction {
                 MessagesTable.select { MessagesTable.id eq id }
@@ -86,17 +82,12 @@ class MessageRepositoryImpl : MessageRepository {
         }
     }
 
-
-
-
     override fun delete(id: Long, userId: Long): Message {
-
         val deletedMessage = findById(id) ?: throw IllegalArgumentException("Message not found for id $id")
 
         val deletedRows = transaction {
             MessagesTable.deleteWhere { MessagesTable.id eq id }
         }
-
         if (deletedRows > 0) {
             return deletedMessage
         } else {
@@ -104,11 +95,7 @@ class MessageRepositoryImpl : MessageRepository {
         }
     }
 
-
-
-
     private fun findById(id: Long): Message? {
-
         return transaction {
             MessagesTable.select { MessagesTable.id eq id}
                 .map { row ->

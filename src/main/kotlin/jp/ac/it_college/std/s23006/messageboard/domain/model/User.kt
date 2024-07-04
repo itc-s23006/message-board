@@ -1,7 +1,5 @@
 package jp.ac.it_college.std.s23006.messageboard.domain.model
 
-import kotlinx.serialization.Serializable
-
 data class User(
     val id: Long,
     var viewName: String,

@@ -2,11 +2,12 @@ package jp.ac.it_college.std.s23006.messageboard.presentation.form
 
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable
+import jp.ac.it_college.std.s23006.messageboard.domain.model.Thread
 
-@kotlinx.serialization.Serializable
+@Serializable
 data class GetThreadListResponse(val threadsList: List<ThreadInfo>)
 
-@kotlinx.serialization.Serializable
+@Serializable
 data class ThreadInfo(
     val id: Long,
     val title: String,
@@ -15,23 +16,23 @@ data class ThreadInfo(
     constructor(model: Thread) : this(model.id, model.title, model.createdAt)
 }
 
-@kotlinx.serialization.Serializable
+@Serializable
 data class PostThreadRequest(
     val title: String,
     val message: String,
 )
 
-@kotlinx.serialization.Serializable
+@Serializable
 data class CreatedThreadResponse(
     val id: Long
 )
 
-@kotlinx.serialization.Serializable
+@Serializable
 data class PutThreadUpdateRequest(
     val title: String,
 )
 
-@kotlinx.serialization.Serializable
+@Serializable
 data class ThreadUpdateResponse(
     val id: Long,
     val title: String,

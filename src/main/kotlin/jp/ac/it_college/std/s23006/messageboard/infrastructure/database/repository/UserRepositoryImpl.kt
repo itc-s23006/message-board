@@ -1,12 +1,13 @@
 package jp.ac.it_college.std.s23006.messageboard.infrastructure.database.repository
 
-import jp.ac.it_college.std.s23006.messageboard.domain.model.User
 import jp.ac.it_college.std.s23006.messageboard.domain.repository.UserRepository
 import jp.ac.it_college.std.s23006.messageboard.infrastructure.database.dao.UserEntity
 import jp.ac.it_college.std.s23006.messageboard.infrastructure.database.dao.UsersTable
-import org.jetbrains.exposed.sql.ResultRow
-import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
+import jp.ac.it_college.std.s23006.messageboard.domain.model.User
+import org.jetbrains.exposed.sql.ResultRow
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.sql.select
 import org.springframework.stereotype.Repository
 
 @Repository
