@@ -1,3 +1,4 @@
+/*
 package jp.ac.it_college.std.s23006.messageboard.infrastructure.database.repository
 
 import jp.ac.it_college.std.s23006.messageboard.domain.repository.ThreadRepository
@@ -35,4 +36,4 @@ class ThreadRepositoryImpl(
     override fun deleteById(id: Long) {
         threadsTable.deleteById(id)
     }
-}
+}*/
