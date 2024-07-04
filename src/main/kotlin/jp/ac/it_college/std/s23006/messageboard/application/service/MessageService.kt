@@ -1,3 +1,4 @@
+/*
 package jp.ac.it_college.std.s23006.messageboard.application.service
 
 import jp.ac.it_college.std.s23006.messageboard.domain.model.Message
@@ -40,4 +41,4 @@ class MessageService(
         if (message.userId.id != userId) throw IllegalAccessException("You cannot delete this message")
         messageRepository.deleteById(id)
     }
-}
+}*/

@@ -1,3 +1,4 @@
+/*
 package jp.ac.it_college.std.s23006.messageboard.application.service
 
 import jp.ac.it_college.std.s23006.messageboard.domain.repository.UserRepository
@@ -26,3 +27,4 @@ class AuthenticationService(
     }
 
 }
+*/

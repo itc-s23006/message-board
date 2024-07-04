@@ -1,3 +1,4 @@
+/*
 package jp.ac.it_college.std.s23006.messageboard.application.service
 
 import jp.ac.it_college.std.s23006.messageboard.domain.repository.ThreadRepository
@@ -45,4 +46,4 @@ class ThreadService(
         val thread = threadRepository.findById(id) ?: throw IllegalArgumentException("Thread not found")
         threadRepository.deleteById(id)
     }
-}
+}*/
