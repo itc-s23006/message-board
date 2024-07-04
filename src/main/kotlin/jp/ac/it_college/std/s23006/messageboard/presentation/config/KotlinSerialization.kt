@@ -1,24 +1,14 @@
 package jp.ac.it_college.std.s23006.messageboard.presentation.config
 
-import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.converter.HttpMessageConverter
 import org.springframework.http.converter.json.KotlinSerializationJsonHttpMessageConverter
-import kotlinx.serialization.json.Json
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
 @Configuration
-class KotlinSerialization {
+class KotlinSerialization : WebMvcConfigurer {
 
-    @Bean
-    fun json(): Json {
-        return Json {
-            prettyPrint = true
-            isLenient = true
-            ignoreUnknownKeys = true
-        }
-    }
-
-    @Bean
-    fun kotlinSerializationJsonHttpMessageConverter(): KotlinSerializationJsonHttpMessageConverter {
-        return KotlinSerializationJsonHttpMessageConverter(json())
+    override fun configureMessageConverters(converters: MutableList<HttpMessageConverter<*>>) {
+        converters.add(KotlinSerializationJsonHttpMessageConverter())
     }
 }
