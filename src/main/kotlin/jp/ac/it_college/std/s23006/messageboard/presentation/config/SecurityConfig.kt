@@ -1,35 +1,35 @@
 package jp.ac.it_college.std.s23006.messageboard.presentation.config
 
-import jp.ac.it_college.std.s23006.messageboard.application.service.security.MessageBoardUserDetailsService
+import org.apache.catalina.webresources.TomcatURLStreamHandlerFactory.disable
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
+import org.springframework.core.annotation.Order
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
+import org.springframework.security.config.web.server.ServerHttpSecurity.http
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.security.web.SecurityFilterChain
 
 @Configuration
 @EnableWebSecurity
-class SecurityConfig(
-    private val userDetailsService: MessageBoardUserDetailsService
-) : WebSecurityConfigurerAdapter() {
-
-    override fun configure(auth: AuthenticationManagerBuilder) {
-        auth.userDetailsService(userDetailsService)
-            .passwordEncoder(passwordEncoder())
-    }
-
-    override fun configure(http: HttpSecurity) {
-        http
-            .csrf().disable()
-            .authorizeRequests()
-            .antMatchers("/users/register").permitAll()
-            .anyRequest().authenticated()
-            .and()
-            .formLogin().permitAll()
-            .and()
-            .logout().permitAll()
+class SecurityConfig {
+    @Bean
+    @Order(1)
+    fun configure(http: HttpSecurity): SecurityFilterChain {
+        http {
+            csrf { disable() }
+            authorizeHttpRequests {
+                authorize("/users/register", "/login", authenticated)
+                authorize(anyRequest, permitAll)
+            }
+            formLogin {
+                loginPage = "/login"
+                permitAll()
+            }
+            httpBasic {}
+        }
+        return http.build()
     }
 
     @Bean
