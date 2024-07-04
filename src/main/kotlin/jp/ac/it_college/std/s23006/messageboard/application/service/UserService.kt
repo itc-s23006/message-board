@@ -2,25 +2,31 @@ package jp.ac.it_college.std.s23006.messageboard.application.service
 
 import jp.ac.it_college.std.s23006.messageboard.domain.model.User
 import jp.ac.it_college.std.s23006.messageboard.domain.repository.UserRepository
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 
 @Service
 class UserService(
     private val userRepository: UserRepository,
-    private val passwordEncoder: PasswordEncoder = BCryptPasswordEncoder()
+    private val passwordEncoder: PasswordEncoder
 ) {
+    fun register(viewName: String, email: String, password: String) {
+        if (userRepository.existsByEmail(email)) {
+            throw IllegalArgumentException("Email is already registered")
+        }
 
-    @Transactional
-    fun register(viewName: String, email: String, password: String): User {
-        val hashedPassword = passwordEncoder.encode(password)
-        val user = User(0, viewName, email, hashedPassword)
-        return userRepository.save(user)
+        val encodedPassword = passwordEncoder.encode(password)
+        val user = User(
+            id = 1L,
+            viewName = viewName,
+            email = email,
+            password = encodedPassword
+        )
+        userRepository.save(user)
     }
 
-    fun find(id: Long): User {
-        return userRepository.findById(id) ?: throw IllegalArgumentException("User not found")
+    fun find(userId: Long): User {
+        return userRepository.findById(userId)
+            ?: throw IllegalArgumentException("User not found")
     }
 }
