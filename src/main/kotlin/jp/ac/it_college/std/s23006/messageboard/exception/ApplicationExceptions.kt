@@ -1,13 +1,20 @@
 package jp.ac.it_college.std.s23006.messageboard.exception
 
-open class ApplicationException(message: String) : RuntimeException(message)
+import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.ResponseStatus
 
-class UserNotFoundException(userId: Long) : ApplicationException("User with ID $userId not found")
+@ResponseStatus(HttpStatus.NOT_FOUND)
 
-class ThreadNotFoundException(threadId: Long) : ApplicationException("Thread with ID $threadId not found")
+class ThreadNotFoundException(override val message: String) : RuntimeException(message)
 
-class MessageNotFoundException(messageId: Long) : ApplicationException("Message with ID $messageId not found")
+@ResponseStatus(HttpStatus.CONFLICT)
 
-class DuplicateEmailException(email: String) : ApplicationException("Email $email is already registered")
+class ThreadIdAlreadyUsedException(override val message: String) : RuntimeException(message)
 
-class UnauthorizedActionException(action: String) : ApplicationException("Unauthorized action: $action")
+@ResponseStatus(HttpStatus.BAD_REQUEST)
+
+class MessagePostingException(override val message: String = "メッセージの投稿時にエラーが発生しました") : RuntimeException(message)
+
+@ResponseStatus(HttpStatus.CONFLICT)
+
+class MessageNotFoundException(override val message: String) : RuntimeException(message)
