@@ -5,7 +5,9 @@ import kotlinx.datetime.LocalDateTime
 data class ThreadWithUser(
     val id: Long,
     val title: String,
-    val user: User,
+    val userId: Long,
+    val userName: String,
     val createdAt: LocalDateTime,
-    val updatedAt: LocalDateTime
+    val updatedAt: LocalDateTime,
+    val deleted: Boolean
 )
