@@ -4,7 +4,6 @@ import kotlinx.datetime.LocalDateTime
 
 data class Message(
     val id: Long,
-    val thread: Long,
     val user: Long,
     val message: String,
     val postedAt: LocalDateTime,

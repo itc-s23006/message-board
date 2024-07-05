@@ -1,7 +1,7 @@
 package jp.ac.it_college.std.s23006.messageboard.application.service.security
 
-import jp.ac.it_college.std.s23006.messageboard.domain.model.User
 import jp.ac.it_college.std.s23006.messageboard.domain.repository.UserRepository
+import jp.ac.it_college.std.s23006.messageboard.domain.model.User
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
@@ -16,6 +16,7 @@ class MessageBoardUserDetailsService (private val userRepository: UserRepository
         return MessageBoardUserDetails(user)
     }
 }
+
 class MessageBoardUserDetails(private val user: User) : UserDetails {
     override fun getAuthorities() = emptyList<org.springframework.security.core.GrantedAuthority>()
     override fun getPassword() = user.password

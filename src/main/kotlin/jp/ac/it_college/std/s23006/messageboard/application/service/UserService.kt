@@ -4,6 +4,7 @@ import jp.ac.it_college.std.s23006.messageboard.domain.model.User
 import jp.ac.it_college.std.s23006.messageboard.domain.repository.UserRepository
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class UserService(
