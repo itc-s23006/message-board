@@ -18,7 +18,6 @@ class MessageEntity(id: EntityID<Long>) : LongEntity(id) {
     fun toModel(): Message {
         return Message(
             id.value,
-            threadId,
             userId,
             message,
             postedAt,
@@ -28,7 +27,6 @@ class MessageEntity(id: EntityID<Long>) : LongEntity(id) {
     }
 
     fun updateFromModel(model: Message) {
-        threadId = model.thread
         userId = model.user
         message = model.message
         postedAt = model.postedAt
