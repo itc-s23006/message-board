@@ -1,4 +1,3 @@
-/*
 package jp.ac.it_college.std.s23006.messageboard.presentation.config
 
 import jp.ac.it_college.std.s23006.messageboard.infrastructure.database.dao.ThreadsTable
@@ -11,4 +10,4 @@ class DatabaseConfig {
     fun threadsTable(): ThreadsTable {
         return ThreadsTable
     }
-}*/
+}

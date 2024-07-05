@@ -4,7 +4,6 @@ import jp.ac.it_college.std.s23006.messageboard.presentation.form.*
 import jp.ac.it_college.std.s23006.messageboard.application.service.MessageService
 import jp.ac.it_college.std.s23006.messageboard.application.service.ThreadService
 import jp.ac.it_college.std.s23006.messageboard.application.service.security.MessageBoardUserDetails
-import jp.ac.it_college.std.s23006.messageboard.infrastructure.database.dao.MessagesTable.threadId
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
 
@@ -20,7 +19,7 @@ class MessageController(
         val thread = threadService.getDetails(threadId)
         val messages = messageService.getListByThread(thread.id)
         return GetMessageListResponse(
-            threadId = threadId, title = thread,
+            threadId = thread.id, title = thread.title,
             messages = messages.map(::MessageInfo)
         )
     }
@@ -31,7 +30,7 @@ class MessageController(
         @RequestBody req: PostMessageRequest,
         @AuthenticationPrincipal user: MessageBoardUserDetails
     ): PostedMessageResponse {
-        val newMessage = messageService.newPost(threadId, req.message, user.getId())
+        val newMessage = messageService.newPost(threadId, req.message, user.id)
         return PostedMessageResponse(newMessage)
     }
 
@@ -41,10 +40,10 @@ class MessageController(
         @RequestBody req: PutMessageUpdateRequest,
         @AuthenticationPrincipal user: MessageBoardUserDetails
     ): MessageUpdateResponse {
-        val updatedMessage = messageService.updateMessage(id, req.message, user.getId())
+        val updatedMessage = messageService.updateMessage(id, req.message, user.id)
         return updatedMessage.run {
             MessageUpdateResponse(
-                id = id, threadId = threadId, message = message, updatedAt = updatedAt
+                id = id, threadId = thread.id, message = message, updatedAt = updatedAt
             )
         }
     }
@@ -54,9 +53,9 @@ class MessageController(
         @PathVariable("id") id: Long,
         @AuthenticationPrincipal user: MessageBoardUserDetails
     ): MessageDeleteResponse {
-        val result = messageService.deleteMessage(id, user.getId())
+        val result = messageService.deleteMessage(id, user.id)
         return result.run {
-            MessageDeleteResponse(id, threadId, updatedAt)
+            MessageDeleteResponse(id, thread.id, updatedAt)
         }
     }
 }
