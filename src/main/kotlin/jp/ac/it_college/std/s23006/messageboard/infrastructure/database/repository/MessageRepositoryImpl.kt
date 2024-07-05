@@ -3,11 +3,11 @@ package jp.ac.it_college.std.s23006.messageboard.infrastructure.database.reposit
 import jp.ac.it_college.std.s23006.messageboard.domain.model.Message
 import jp.ac.it_college.std.s23006.messageboard.domain.repository.MessageRepository
 import jp.ac.it_college.std.s23006.messageboard.infrastructure.database.dao.MessagesTable
-import jp.ac.it_college.std.s23006.messageboard.infrastructure.database.dao.UserEntity.Companion.findById
 import kotlinx.datetime.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insertAndGetId
+import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.jetbrains.exposed.sql.update
 import org.springframework.stereotype.Repository
@@ -24,7 +24,7 @@ class MessageRepositoryImpl : MessageRepository {
                         message = row[MessagesTable.message],
                         postedAt = row[MessagesTable.postedAt],
                         updatedAt = row[MessagesTable.updatedAt],
-                        deleted = row[MessagesTable.deleted].toBoolean
+                        deleted = row[MessagesTable.deleted]
                     )
                 }
         }
